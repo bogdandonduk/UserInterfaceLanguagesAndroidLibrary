@@ -1,0 +1,3 @@
+include ':UserInterfaceLanguagesAndroid'
+include ':app'
+rootProject.name = "UserInterfaceLanguagesAndroidLibrary"
