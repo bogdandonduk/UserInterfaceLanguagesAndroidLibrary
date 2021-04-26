@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.widget.TooltipCompat
 import java.util.*
 
 object UILanguagesService {
@@ -44,5 +45,9 @@ object UILanguagesService {
 
     fun initializeOptionsItemTitleLanguage(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
         menuItem?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
+    }
+
+    fun initializeOptionsItemTooltipLanguage(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
+        if(menuItem != null) TooltipCompat.setTooltipText(menuItem.actionView, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
     }
 }
