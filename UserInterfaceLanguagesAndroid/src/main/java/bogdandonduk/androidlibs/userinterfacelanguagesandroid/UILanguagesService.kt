@@ -8,8 +8,10 @@ import android.os.Build
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.ActionMenuView
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.TooltipCompat
+import androidx.core.view.children
 import java.util.*
 
 object UILanguagesService {
@@ -48,29 +50,23 @@ object UILanguagesService {
     }
 
     fun initializeDrawerToggleTooltipLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
-        if(toolbar != null && toolbar.childCount != 0) {
-            for(i in 0 until toolbar.childCount) {
-                toolbar.getChildAt(i).run {
-                    if(this != null && this.toString().contains("imagebutton", true)) {
-                        TooltipCompat.setTooltipText(this, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
-                    }
-                }
+        if(toolbar != null && toolbar.childCount > 0)
+            toolbar.children.forEach {
+                if(it.toString().contains("imagebutton", true)) TooltipCompat.setTooltipText(it, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
             }
-        }
     }
 
     fun initializeOptionsMenuItemTooltipLanguage(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
         if(menuItem != null && menuItem.actionView != null) TooltipCompat.setTooltipText(menuItem.actionView, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
     }
-    
+
     fun initializeOverflowMenuTooltipLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
-        if(toolbar != null && toolbar.childCount != 0) {
-            for(i in 0 until toolbar.childCount) {
-                toolbar.getChildAt(i).run {
-                    if(this != null && this.toString().contains("overflow", true))
-                        TooltipCompat.setTooltipText(this, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
-                }
+        if(toolbar != null && toolbar.childCount > 0)
+            toolbar.children.forEach {
+                if(it is ActionMenuView)
+                    it.children.forEach { menuItemChild ->
+                        if(menuItemChild.toString().contains("overflowmenu", true)) TooltipCompat.setTooltipText(menuItemChild, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
+                    }
             }
-        }
     }
 }
