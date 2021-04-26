@@ -42,8 +42,7 @@ object UILanguagesService {
         toolbar?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
 
-    fun initializeOptionsItemTooltipText(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            menuItem?.tooltipText = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
+    fun initializeOptionsItemTitleLanguage(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
+        menuItem?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
 }
