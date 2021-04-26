@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.Toolbar
 import java.util.*
 
 object UILanguagesService {
@@ -33,5 +36,14 @@ object UILanguagesService {
 
     fun initializeTextLanguage(context: Context, text: TextView, @StringRes stringResId: Int) {
         text.text = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
+    }
+
+    fun initializeActionBarTitleLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
+        toolbar?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
+    }
+
+    fun initializeOptionsItemTooltipText(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            menuItem?.tooltipText = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
 }
