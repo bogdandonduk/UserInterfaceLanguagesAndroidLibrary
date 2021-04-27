@@ -39,6 +39,9 @@ object UILanguagesService {
     private fun getConfiguredResources(context: Context, languageCode: String) : Resources =
         context.createConfigurationContext(Configuration(context.resources.configuration).apply { setLocale(Locale(languageCode)) }).resources
 
+    private fun resolveStringResource(context: Context, @StringRes stringResId: Int, languageCode: String = getAppLanguageCode(context)) =
+        getConfiguredResources(context, languageCode).getString(stringResId)
+
     fun initializeTextLanguage(context: Context, text: TextView, @StringRes stringResId: Int) {
         text.text = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
