@@ -49,7 +49,7 @@ object UILanguagesService {
         menuItem?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
 
-    fun initializeDrawerToggleTooltipLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
+    fun initializeHomeAsUpIndicatorTooltipLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
         if(toolbar != null && toolbar.childCount > 0)
             toolbar.children.forEach {
                 if(it.toString().contains("imagebutton", true)) TooltipCompat.setTooltipText(it, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
