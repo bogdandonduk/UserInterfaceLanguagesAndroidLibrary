@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
+import android.text.Editable
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.ActionMenuView
@@ -68,5 +70,13 @@ object UILanguagesService {
                         if(menuItemChild.toString().contains("overflowmenu", true)) TooltipCompat.setTooltipText(menuItemChild, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
                     }
             }
+    }
+
+    fun initializeEditTextLanguage(context: Context, editText: EditText, @StringRes stringResId: Int) {
+        editText.text = Editable.Factory.getInstance().newEditable(getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
+    }
+
+    fun initializeEditTextHintLanguage(context: Context, editText: EditText, @StringRes stringResId: Int) {
+        editText.hint = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
 }
