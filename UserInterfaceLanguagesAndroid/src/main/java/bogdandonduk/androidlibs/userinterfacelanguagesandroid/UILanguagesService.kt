@@ -48,37 +48,8 @@ object UILanguagesService {
         text.text = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
 
-    fun initializeActionBarTitleLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
-        toolbar?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
-    }
-
-    fun initializeOptionsItemTitleLanguage(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
+    fun initializeMenuItemTitleLanguage(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
         menuItem?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
-    }
-
-    fun initializeHomeAsUpIndicatorTooltipLanguage(activity: Activity, toolbar: Toolbar?, @StringRes stringResId: Int) {
-        if(toolbar != null && toolbar.childCount > 0)
-            toolbar.children.forEach {
-                if(it.toString().contains("imagebutton", true)) it.setOnLongClickListener { view ->
-                    PopupUtilsService.getTooltipPopupBuilder("home_as_up_indicator_tooltip").showPopup(activity, view)
-
-                    false
-                }
-            }
-    }
-
-    fun initializeOptionsMenuItemTooltipLanguage(context: Context, menuItem: MenuItem?, @StringRes stringResId: Int) {
-        if(menuItem != null && menuItem.actionView != null) TooltipCompat.setTooltipText(menuItem.actionView, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
-    }
-
-    fun initializeOverflowMenuTooltipLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
-        if(toolbar != null && toolbar.childCount > 0)
-            toolbar.children.forEach {
-                if(it is ActionMenuView)
-                    it.children.forEach { menuItemChild ->
-                        if(menuItemChild.toString().contains("overflowmenu", true)) TooltipCompat.setTooltipText(menuItemChild, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
-                    }
-            }
     }
 
     fun initializeEditTextLanguage(context: Context, editText: EditText, @StringRes stringResId: Int) {
