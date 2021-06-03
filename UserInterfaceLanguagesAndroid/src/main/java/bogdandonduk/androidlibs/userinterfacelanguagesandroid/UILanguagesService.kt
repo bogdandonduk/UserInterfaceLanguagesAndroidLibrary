@@ -1,5 +1,6 @@
 package bogdandonduk.androidlibs.userinterfacelanguagesandroid
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
@@ -14,6 +15,7 @@ import androidx.appcompat.widget.ActionMenuView
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.children
+import bogdandonduk.androidlibs.popuputilsandroid.PopupUtilsService
 import java.util.*
 
 object UILanguagesService {
@@ -54,10 +56,14 @@ object UILanguagesService {
         menuItem?.title = getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId)
     }
 
-    fun initializeHomeAsUpIndicatorTooltipLanguage(context: Context, toolbar: Toolbar?, @StringRes stringResId: Int) {
+    fun initializeHomeAsUpIndicatorTooltipLanguage(activity: Activity, toolbar: Toolbar?, @StringRes stringResId: Int) {
         if(toolbar != null && toolbar.childCount > 0)
             toolbar.children.forEach {
-                if(it.toString().contains("imagebutton", true)) TooltipCompat.setTooltipText(it, getConfiguredResources(context, getAppLanguageCode(context)).getString(stringResId))
+                if(it.toString().contains("imagebutton", true)) it.setOnLongClickListener { view ->
+                    PopupUtilsService.getTooltipPopupBuilder("home_as_up_indicator_tooltip").showPopup(activity, view)
+
+                    false
+                }
             }
     }
 
